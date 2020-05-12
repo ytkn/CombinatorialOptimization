@@ -85,6 +85,6 @@ if __name__ == "__main__":
     plot_tour(double_tree, x, y)
     plot_tour(christofides, x, y)
 
-    print("distance by double tree  : {:.1f} [km]".format(calc_dist(double_tree, x, y)))
-    print("distance by christofides : {:.1f} [km]".format(calc_dist(christofides, x, y)))
-    print("distance by random trip  : {:.1f} [km]".format(calc_expected_dist(x, y)))
+    print("distance by double tree  : {:.0f} [km]".format(calc_dist(double_tree, x, y)))
+    print("distance by christofides : {:.0f} [km]".format(calc_dist(christofides, x, y)))
+    print("distance by random trip  : {:.0f} [km]".format(calc_expected_dist(x, y)))

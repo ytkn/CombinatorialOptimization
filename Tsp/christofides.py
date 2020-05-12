@@ -6,8 +6,7 @@ class Christofides():
         self.n = n
         self.graph = graph
         self.mst = nx.minimum_spanning_tree(graph)
-        self.eulerian_graph = nx.Graph()
-        self.used = [False for _ in range(n)]
+        self.eulerian_graph = nx.MultiGraph()
     
     def _odd_degree_vertices(self):
         result = []
@@ -26,20 +25,23 @@ class Christofides():
     def _make_eulerian_graph(self):
         odd_complete_graph = self._odd_complete_greph()
         matching = nx.max_weight_matching(odd_complete_graph, maxcardinality=True)
-        self.eulerian_graph = self.mst
+
+        for v, to in self.mst.edges():
+            self.eulerian_graph.add_edge(v, to, self.mst[v][to]["weight"])
+            
         for i, j in matching:
             self.eulerian_graph.add_edge(i, j, weight = self.graph[i][j]['weight'])
     
-    def _dfs(self, v, result):
-        result.append(v)
-        self.used[v] = True
-        for to in self.eulerian_graph[v]:
-            if not self.used[to]:
-                self._dfs(to, result)
-    
     def exec(self):
+        used = [False for _ in range(self.n)]
         self._make_eulerian_graph()
+        eulerian_circuit = nx.eulerian_circuit(self.eulerian_graph)
         tour = []
-        self._dfs(0, tour)
-        tour.append(tour[0])
+        for s, t in eulerian_circuit:
+            if len(tour) == 0:
+                tour.append(s)
+                used[s] = True
+            if not used[t]:
+                tour.append(t)
+                used[t] = True
         return tour
