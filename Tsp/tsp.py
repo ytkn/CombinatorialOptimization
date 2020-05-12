@@ -3,8 +3,8 @@ import itertools
 import networkx as nx
 import matplotlib.pyplot as plt
 
-from .christofides import Christofides
-from .double_tree import DoubleTree
+from christofides import Christofides
+from double_tree import DoubleTree
 
 def deg2rad(x):
     return math.pi*x/180.0
