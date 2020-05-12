@@ -1,10 +1,7 @@
 import math
 import itertools
-import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-from scipy.sparse import csr_matrix
-from scipy.sparse.csgraph import minimum_spanning_tree
 
 from christofides import Christofides
 from double_tree import DoubleTree
